@@ -1,28 +1,23 @@
 package id.ilhamsuaib.footballclub.home
 
-import id.ilhamsuaib.footballclub.BaseApp
-import id.ilhamsuaib.footballclub.data.ApiService
-import id.ilhamsuaib.footballclub.getResponse
+import id.ilhamsuaib.footballclub.base.BasePresenter
+import id.ilhamsuaib.footballclub.utilities.getResponse
 
 /**
  * Created by @ilhamsuaib on 05/10/18.
  * github.com/ilhamsuaib
  */
 
-class MatchPresenter(private val view: MatchView) {
-
-    private val apiService: ApiService by lazy {
-        BaseApp.API_SERVICE
-    }
+class MatchPresenter : BasePresenter<ServiceCallback>() {
 
     fun getMatch(matchType: String?, leagueId: String = MatchFragment.LEAGUE_ID) {
         apiService.getMatch(matchType, leagueId)
-                .getResponse({ response ->
+                .getResponse({
+                    callback?.onFailed(it)
+                }, { response ->
                     response?.events?.let {
-                        view.showMatch(matchList = it)
+                        callback?.showMatch(matchList = it)
                     }
-                }, {
-                    view.onFailed(it)
                 })
     }
 }

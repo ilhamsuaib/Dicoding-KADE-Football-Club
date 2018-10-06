@@ -7,7 +7,7 @@ import id.ilhamsuaib.footballclub.data.model.MatchModel
  * github.com/ilhamsuaib
  */
 
-interface MatchView {
+interface ServiceCallback {
     fun showMatch(matchList: List<MatchModel>)
     fun onFailed(message: String)
 }

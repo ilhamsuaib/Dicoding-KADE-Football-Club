@@ -1,12 +1,15 @@
 package id.ilhamsuaib.footballclub.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by @ilhamsuaib on 05/10/18.
  * github.com/ilhamsuaib
  */
 
+@Parcelize
 data class MatchModel(
         @field:SerializedName("idEvent")
         val idEvent: String? = null,
@@ -41,11 +44,11 @@ data class MatchModel(
         @field:SerializedName("strHomeGoalDetails")
         val strHomeGoalDetails: String? = null,
         @field:SerializedName("strHomeRedCards")
-        val strHomeRedCards: String,
+        val strHomeRedCards: String? = null,
         @field:SerializedName("strHomeYellowCards")
-        val strHomeYellowCards: String,
+        val strHomeYellowCards: String? = null,
         @field:SerializedName("strHomeLineupGoalkeeper")
-        val strHomeLineupGoalkeeper: String,
+        val strHomeLineupGoalkeeper: String? = null,
         @field:SerializedName("strHomeLineupDefense")
         val strHomeLineupDefense: String? = null,
         @field:SerializedName("strHomeLineupMidfield")
@@ -110,4 +113,4 @@ data class MatchModel(
         val strMap: String? = null,
         @field:SerializedName("strLocked")
         val strLocked: String? = null
-)
+): Parcelable

@@ -33,6 +33,7 @@ ext {
     support_vers = '28.0.0'
     retrofit2_vers = '2.4.0'
     okhttp3_vers = '3.10.0'
+    groupie_vers = '2.1.0'
 }
 
 dependencies {
@@ -50,6 +51,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:' + retrofit2_vers
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_vers"
     implementation "com.squareup.okhttp3:okhttp:$okhttp3_vers"
+
+    //groupie adapter
+    implementation 'com.xwray:groupie:' + groupie_vers
+    implementation 'com.xwray:groupie-kotlin-android-extensions:' + groupie_vers
 
     implementation 'com.squareup.picasso:picasso:2.71828'
     testImplementation 'junit:junit:4.12'

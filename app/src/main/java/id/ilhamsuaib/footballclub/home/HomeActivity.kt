@@ -15,6 +15,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        this.title = "La Liga Santander"
         val pagerAdapter = ViewPagerAdapter(supportFragmentManager)
         pagerAdapter.addFragment(MatchFragment.newInstance("eventspastleague.php"), "Last Match")
         pagerAdapter.addFragment(MatchFragment.newInstance("eventsnextleague.php"), "Next Match")

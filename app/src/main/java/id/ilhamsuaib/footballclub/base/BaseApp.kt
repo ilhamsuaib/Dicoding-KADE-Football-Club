@@ -1,6 +1,7 @@
-package id.ilhamsuaib.footballclub
+package id.ilhamsuaib.footballclub.base
 
 import android.app.Application
+import id.ilhamsuaib.footballclub.BuildConfig
 import id.ilhamsuaib.footballclub.data.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,21 +17,15 @@ import java.util.concurrent.TimeUnit
 class BaseApp : Application() {
 
     companion object {
-        lateinit var API_SERVICE: ApiService
+        val API_SERVICE: ApiService = BaseApp().getRetrofit().create(ApiService::class.java)
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        networkConfig()
-    }
-
-    private fun networkConfig() {
-        val retrofit = Retrofit.Builder()
+    private fun getRetrofit(): Retrofit {
+        return Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getHttpClient())
                 .build()
-        API_SERVICE = retrofit.create(ApiService::class.java)
     }
 
     private fun getHttpClient(): OkHttpClient {

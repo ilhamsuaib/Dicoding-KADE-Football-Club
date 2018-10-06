@@ -28,11 +28,13 @@ class MatchAdapter(private val itemList: List<MatchModel>,
         holder.bind(itemList[p])
     }
 
-    class Holder(itemView: View, private val onItemClick: (match: MatchModel) -> Unit)
-        : RecyclerView.ViewHolder(itemView) {
+    class Holder(itemView: View,
+                 private val onItemClick: (match: MatchModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(match: MatchModel) {
-            itemView.tvMatch.text = match.strFilename
+            itemView.tvDateTime.text = match.dateEvent
+            itemView.tvHomeTeam.text = match.strHomeTeam
+            itemView.tvAwayTeam.text = match.strAwayTeam
             itemView.setOnClickListener {
                 onItemClick(match)
             }
