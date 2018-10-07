@@ -1,6 +1,6 @@
 package id.ilhamsuaib.footballclub.base
 
-import id.ilhamsuaib.footballclub.data.ApiService
+import id.ilhamsuaib.footballclub.data.remote.ApiService
 
 /**
  * Created by @ilhamsuaib on 06/10/18.
@@ -11,7 +11,7 @@ open class BasePresenter<T> {
 
     protected var callback: T? = null
     protected val apiService: ApiService by lazy {
-        BaseApp.API_SERVICE
+        NetworkConfig.getApiService()
     }
 
     fun bindCallback(callback: T?) {

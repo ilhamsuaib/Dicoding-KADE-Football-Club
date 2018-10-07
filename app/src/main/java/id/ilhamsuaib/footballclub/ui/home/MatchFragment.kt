@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.home
+package id.ilhamsuaib.footballclub.ui.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import id.ilhamsuaib.footballclub.R
-import id.ilhamsuaib.footballclub.matchDetail.MatchDetailActivity
+import id.ilhamsuaib.footballclub.ui.matchDetail.MatchDetailActivity
 import id.ilhamsuaib.footballclub.model.MatchModel
 import kotlinx.android.synthetic.main.fragment_match.view.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import id.ilhamsuaib.footballclub.utilities.Const
 
 /**
  * Created by @ilhamsuaib on 05/10/18.
@@ -56,9 +57,10 @@ class MatchFragment : Fragment(), ServiceCallback {
     }
 
     override fun showMatch(matchList: List<MatchModel>) {
+        matchAdapter.clear()
         matchList.forEach {
             matchAdapter.add(MatchAdapter(it) {
-                startActivity<MatchDetailActivity>("match" to it)
+                startActivity<MatchDetailActivity>(Const.MATCH to it)
             })
         }
     }

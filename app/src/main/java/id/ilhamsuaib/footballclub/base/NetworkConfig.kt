@@ -1,8 +1,7 @@
 package id.ilhamsuaib.footballclub.base
 
-import android.app.Application
 import id.ilhamsuaib.footballclub.BuildConfig
-import id.ilhamsuaib.footballclub.data.ApiService
+import id.ilhamsuaib.footballclub.data.remote.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,10 +13,10 @@ import java.util.concurrent.TimeUnit
  * github.com/ilhamsuaib
  */
 
-class BaseApp : Application() {
+class NetworkConfig {
 
     companion object {
-        val API_SERVICE: ApiService = BaseApp().getRetrofit().create(ApiService::class.java)
+        fun getApiService(): ApiService = NetworkConfig().getRetrofit().create(ApiService::class.java)
     }
 
     private fun getRetrofit(): Retrofit {

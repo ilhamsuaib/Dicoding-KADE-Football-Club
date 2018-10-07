@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.home
+package id.ilhamsuaib.footballclub.ui.home
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

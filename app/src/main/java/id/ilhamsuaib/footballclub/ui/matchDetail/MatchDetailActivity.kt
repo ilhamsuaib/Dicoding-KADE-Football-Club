@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.matchDetail
+package id.ilhamsuaib.footballclub.ui.matchDetail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,10 +10,7 @@ import id.ilhamsuaib.footballclub.R
 import id.ilhamsuaib.footballclub.model.MatchDetailModel
 import id.ilhamsuaib.footballclub.model.MatchModel
 import id.ilhamsuaib.footballclub.model.TeamModel
-import id.ilhamsuaib.footballclub.utilities.loadImage
-import id.ilhamsuaib.footballclub.utilities.logD
-import id.ilhamsuaib.footballclub.utilities.parseDate
-import id.ilhamsuaib.footballclub.utilities.toJson
+import id.ilhamsuaib.footballclub.utilities.*
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.toast
 
@@ -39,14 +36,14 @@ class MatchDetailActivity : AppCompatActivity(), ServiceCallback {
     }
 
     private fun initView() {
-        this.title = "Match Detail"
+        this.title = getString(R.string.match_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         rvMatchDetail.apply {
             layoutManager = LinearLayoutManager(this@MatchDetailActivity)
             adapter = detailAdapter
         }
 
-        match = intent?.getParcelableExtra("match")
+        match = intent?.getParcelableExtra(Const.MATCH)
 
         presenter.getMatchDetail(match?.idEvent)
         presenter.getTeamDetail(match?.idHomeTeam, match?.idAwayTeam)
@@ -64,41 +61,41 @@ class MatchDetailActivity : AppCompatActivity(), ServiceCallback {
 
     private fun setupDetailMatch(match: MatchModel) {
         logD(tag, "setupDetailMatch : ${match.toJson()}")
-        itemList.add("Match Detail")
+        itemList.add(getString(R.string.match_detail))
         itemList.add(MatchDetailModel(
                 leftText = match.strHomeGoalDetails,
-                midText = "goals",
+                midText = getString(R.string.goals),
                 rightText = match.strAwayGoalDetails
         ))
         itemList.add(MatchDetailModel(
                 leftText = match.intHomeShots,
-                midText = "shots",
+                midText = getString(R.string.shots),
                 rightText = match.intAwayShots
         ))
-        itemList.add("Lineups")
+        itemList.add(getString(R.string.lineups))
         itemList.add(MatchDetailModel(
                 leftText = match.strHomeLineupGoalkeeper,
-                midText = "goal keeper",
+                midText = getString(R.string.goal_keeper),
                 rightText = match.strAwayLineupGoalkeeper
         ))
         itemList.add(MatchDetailModel(
                 leftText = match.strHomeLineupDefense,
-                midText = "defense",
+                midText = getString(R.string.defense),
                 rightText = match.strAwayLineupDefense
         ))
         itemList.add(MatchDetailModel(
                 leftText = match.strHomeLineupMidfield,
-                midText = "midfields",
+                midText = getString(R.string.midfields),
                 rightText = match.strAwayLineupMidfield
         ))
         itemList.add(MatchDetailModel(
                 leftText = match.strHomeLineupForward,
-                midText = "forward",
+                midText = getString(R.string.forward),
                 rightText = match.strAwayLineupForward
         ))
         itemList.add(MatchDetailModel(
                 leftText = match.strHomeLineupSubstitutes,
-                midText = "substitutes",
+                midText = getString(R.string.substitutes),
                 rightText = match.strAwayLineupSubstitutes
         ))
 

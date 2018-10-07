@@ -45,6 +45,7 @@ dependencies {
 
     //anko
     implementation "org.jetbrains.anko:anko:$anko_vers"
+    implementation "org.jetbrains.anko:anko-sqlite:$anko_vers"
 
     //network
     implementation 'com.squareup.retrofit2:retrofit:' + retrofit2_vers

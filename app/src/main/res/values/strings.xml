@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Football Club</string>
     <string name="vs">vs</string>
+    <string name="goals">goals</string>
+    <string name="shots">shots</string>
+    <string name="goal_keeper">goal keeper</string>
+    <string name="defense">defense</string>
+    <string name="midfields">midfields</string>
+    <string name="forward">forward</string>
+    <string name="substitutes">substitutes</string>
+    <string name="match_detail">Match Detail</string>
+    <string name="lineups">Lineups</string>
+    <string name="laliga_santander">La Liga Santander</string>
+    <string name="last_match">Last Match</string>
+    <string name="next_match">Next Match</string>
+    <string name="favorites">Faforites</string>
 </resources>

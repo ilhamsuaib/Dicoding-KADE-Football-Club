@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.home
+package id.ilhamsuaib.footballclub.ui.home
 
 import id.ilhamsuaib.footballclub.model.MatchModel
 

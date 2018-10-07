@@ -1,10 +1,12 @@
 package id.ilhamsuaib.footballclub.utilities
 
+import android.content.Context
 import android.util.Log
 import android.widget.ImageView
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.squareup.picasso.Picasso
+import id.ilhamsuaib.footballclub.data.local.DatabaseHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,6 +51,9 @@ fun String.parseDate(pattern: String): String {
     val newSdf = SimpleDateFormat("E, dd MMM yyyy", Locale.getDefault())
     return newSdf.format(date)
 }
+
+val Context.database: DatabaseHelper?
+    get() = DatabaseHelper.getInstance(applicationContext)
 
 fun logD(tag: String = "logD", s: String?) {
     Log.d(tag, s)

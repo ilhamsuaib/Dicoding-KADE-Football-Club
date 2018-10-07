@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.data
+package id.ilhamsuaib.footballclub.data.remote
 
 import id.ilhamsuaib.footballclub.BuildConfig
 import id.ilhamsuaib.footballclub.model.MatchResponse

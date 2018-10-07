@@ -1,8 +1,9 @@
-package id.ilhamsuaib.footballclub.home
+package id.ilhamsuaib.footballclub.ui.home
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import id.ilhamsuaib.footballclub.R
+import id.ilhamsuaib.footballclub.utilities.database
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -15,10 +16,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        this.title = "La Liga Santander"
+        this.title = getString(R.string.laliga_santander)
         val pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        pagerAdapter.addFragment(MatchFragment.newInstance("eventspastleague.php"), "Last Match")
-        pagerAdapter.addFragment(MatchFragment.newInstance("eventsnextleague.php"), "Next Match")
+        pagerAdapter.addFragment(MatchFragment.newInstance("eventspastleague.php"), getString(R.string.last_match))
+        pagerAdapter.addFragment(MatchFragment.newInstance("eventsnextleague.php"), getString(R.string.next_match))
+        pagerAdapter.addFragment(FavoritesFragment.newInstance(), getString(R.string.favorites))
         viewPager.adapter = pagerAdapter
         tabView.setupWithViewPager(viewPager)
     }
