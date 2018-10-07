@@ -42,8 +42,10 @@ fun ImageView.loadImage(url: String?) {
 }
 
 fun String.parseDate(pattern: String): String {
+    logD(s = "old date $this")
     val sdf = SimpleDateFormat(pattern, Locale.getDefault())
     val date = sdf.parse(this)
+    logD(s = "old date $date")
     val newSdf = SimpleDateFormat("E, dd MMM yyyy", Locale.getDefault())
     return newSdf.format(date)
 }

@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.data.model
+package id.ilhamsuaib.footballclub.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

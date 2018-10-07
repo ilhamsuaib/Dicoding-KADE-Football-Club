@@ -6,9 +6,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import id.ilhamsuaib.footballclub.R
-import id.ilhamsuaib.footballclub.data.model.MatchModel
 import id.ilhamsuaib.footballclub.matchDetail.MatchDetailActivity
+import id.ilhamsuaib.footballclub.model.MatchModel
 import kotlinx.android.synthetic.main.fragment_match.view.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
@@ -34,13 +36,7 @@ class MatchFragment : Fragment(), ServiceCallback {
     }
 
     private val presenter = MatchPresenter()
-    private val matchList = mutableListOf<MatchModel>()
-    private val matchAdapter: MatchAdapter by lazy {
-        MatchAdapter(matchList) { match ->
-            match.idHomeTeam?.let { toast(it) }
-            startActivity<MatchDetailActivity>("match" to match)
-        }
-    }
+    private val matchAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter.bindCallback(this)
@@ -60,8 +56,11 @@ class MatchFragment : Fragment(), ServiceCallback {
     }
 
     override fun showMatch(matchList: List<MatchModel>) {
-        this.matchList.addAll(matchList)
-        matchAdapter.notifyDataSetChanged()
+        matchList.forEach {
+            matchAdapter.add(MatchAdapter(it) {
+                startActivity<MatchDetailActivity>("match" to it)
+            })
+        }
     }
 
     override fun onFailed(message: String) {

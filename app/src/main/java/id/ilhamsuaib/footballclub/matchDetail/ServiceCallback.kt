@@ -1,7 +1,7 @@
 package id.ilhamsuaib.footballclub.matchDetail
 
-import id.ilhamsuaib.footballclub.data.model.MatchModel
-import id.ilhamsuaib.footballclub.data.model.TeamModel
+import id.ilhamsuaib.footballclub.model.MatchModel
+import id.ilhamsuaib.footballclub.model.TeamModel
 
 /**
  * Created by @ilhamsuaib on 06/10/18.

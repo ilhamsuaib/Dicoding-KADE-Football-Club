@@ -1,11 +1,10 @@
 package id.ilhamsuaib.footballclub.home
 
-import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import com.xwray.groupie.kotlinandroidextensions.Item
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import id.ilhamsuaib.footballclub.R
-import id.ilhamsuaib.footballclub.data.model.MatchModel
+import id.ilhamsuaib.footballclub.model.MatchModel
+import id.ilhamsuaib.footballclub.utilities.parseDate
 import kotlinx.android.synthetic.main.adapter_match.view.*
 
 /**
@@ -13,31 +12,20 @@ import kotlinx.android.synthetic.main.adapter_match.view.*
  * github.com/ilhamsuaib
  */
 
-class MatchAdapter(private val itemList: List<MatchModel>,
-                   private val onItemClick: (match: MatchModel) -> Unit) : RecyclerView.Adapter<MatchAdapter.Holder>() {
+class MatchAdapter(private val match: MatchModel,
+                   private val onItemClick: () -> Unit): Item() {
 
-    override fun onCreateViewHolder(group: ViewGroup, p: Int): Holder {
-        val view = LayoutInflater.from(group.context)
-                .inflate(R.layout.adapter_match, group, false)
-        return Holder(view, onItemClick)
-    }
-
-    override fun getItemCount(): Int = itemList.size
-
-    override fun onBindViewHolder(holder: Holder, p: Int) {
-        holder.bind(itemList[p])
-    }
-
-    class Holder(itemView: View,
-                 private val onItemClick: (match: MatchModel) -> Unit) : RecyclerView.ViewHolder(itemView) {
-
-        fun bind(match: MatchModel) {
-            itemView.tvDateTime.text = match.dateEvent
-            itemView.tvHomeTeam.text = match.strHomeTeam
-            itemView.tvAwayTeam.text = match.strAwayTeam
-            itemView.setOnClickListener {
-                onItemClick(match)
-            }
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        val itemView = viewHolder.itemView
+        itemView.tvDateTime.text = match.dateEvent?.parseDate("yyyy-MM-dd")
+        itemView.tvHomeTeam.text = match.strHomeTeam
+        itemView.tvAwayTeam.text = match.strAwayTeam
+        itemView.tvHomeScore.text = match.intHomeScore ?: "?"
+        itemView.tvAwayScore.text = match.intAwayScore ?: "?"
+        itemView.setOnClickListener {
+            onItemClick()
         }
     }
+
+    override fun getLayout(): Int = R.layout.adapter_match
 }
