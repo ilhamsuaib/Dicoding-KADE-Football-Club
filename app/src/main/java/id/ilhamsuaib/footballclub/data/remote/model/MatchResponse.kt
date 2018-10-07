@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.model
+package id.ilhamsuaib.footballclub.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 

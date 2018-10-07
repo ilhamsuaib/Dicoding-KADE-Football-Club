@@ -5,7 +5,7 @@ package id.ilhamsuaib.footballclub.model
  * github.com/ilhamsuaib
  */
 
-data class MatchDetailModel(
+data class MatchDetail(
         val leftText: String?,
         val midText: String,
         val rightText: String?

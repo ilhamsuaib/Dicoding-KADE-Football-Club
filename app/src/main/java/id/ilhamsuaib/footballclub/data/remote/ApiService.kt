@@ -1,8 +1,8 @@
 package id.ilhamsuaib.footballclub.data.remote
 
 import id.ilhamsuaib.footballclub.BuildConfig
-import id.ilhamsuaib.footballclub.model.MatchResponse
-import id.ilhamsuaib.footballclub.model.TeamResponse
+import id.ilhamsuaib.footballclub.data.remote.model.MatchResponse
+import id.ilhamsuaib.footballclub.data.remote.model.TeamResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

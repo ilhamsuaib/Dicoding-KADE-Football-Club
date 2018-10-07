@@ -3,7 +3,7 @@ package id.ilhamsuaib.footballclub.ui.matchDetail
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import id.ilhamsuaib.footballclub.R
-import id.ilhamsuaib.footballclub.model.MatchDetailModel
+import id.ilhamsuaib.footballclub.model.MatchDetail
 import kotlinx.android.synthetic.main.item_detail.view.*
 
 /**
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_detail.view.*
  * github.com/ilhamsuaib
  */
 
-class ItemDetailAdapter(private val item: MatchDetailModel) : Item() {
+class ItemDetailAdapter(private val item: MatchDetail) : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         val view = viewHolder.itemView

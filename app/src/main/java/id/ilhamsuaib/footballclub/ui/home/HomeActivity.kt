@@ -3,7 +3,8 @@ package id.ilhamsuaib.footballclub.ui.home
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import id.ilhamsuaib.footballclub.R
-import id.ilhamsuaib.footballclub.utilities.database
+import id.ilhamsuaib.footballclub.ui.home.favorite.FavoritesFragment
+import id.ilhamsuaib.footballclub.ui.home.match.MatchFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {

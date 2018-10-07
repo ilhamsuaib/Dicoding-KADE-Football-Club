@@ -14,4 +14,8 @@
     <string name="last_match">Last Match</string>
     <string name="next_match">Next Match</string>
     <string name="favorites">Faforites</string>
+    <string name="tambah_ke_favorit">Tambah ke favorit</string>
+    <string name="hapus_dari_favorit">Hapus dari favorit</string>
+    <string name="ditambahkan_ke_favorit">Ditambahkan ke favorit</string>
+    <string name="dihapus_dari_favorit">Dihapus dari favorit</string>
 </resources>

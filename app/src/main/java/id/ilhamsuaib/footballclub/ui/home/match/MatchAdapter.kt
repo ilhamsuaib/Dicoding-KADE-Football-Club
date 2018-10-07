@@ -1,9 +1,9 @@
-package id.ilhamsuaib.footballclub.ui.home
+package id.ilhamsuaib.footballclub.ui.home.match
 
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import id.ilhamsuaib.footballclub.R
-import id.ilhamsuaib.footballclub.model.MatchModel
+import id.ilhamsuaib.footballclub.model.Match
 import id.ilhamsuaib.footballclub.utilities.parseDate
 import kotlinx.android.synthetic.main.adapter_match.view.*
 
@@ -12,16 +12,16 @@ import kotlinx.android.synthetic.main.adapter_match.view.*
  * github.com/ilhamsuaib
  */
 
-class MatchAdapter(private val match: MatchModel,
-                   private val onItemClick: () -> Unit): Item() {
+class MatchAdapter(private val match: Match,
+                   private val onItemClick: () -> Unit) : Item() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         val itemView = viewHolder.itemView
-        itemView.tvDateTime.text = match.dateEvent?.parseDate("yyyy-MM-dd")
-        itemView.tvHomeTeam.text = match.strHomeTeam
-        itemView.tvAwayTeam.text = match.strAwayTeam
-        itemView.tvHomeScore.text = match.intHomeScore ?: "?"
-        itemView.tvAwayScore.text = match.intAwayScore ?: "?"
+        itemView.tvDateTime.text = match.matchDate?.parseDate("yyyy-MM-dd")
+        itemView.tvHomeTeam.text = match.homeTeamName
+        itemView.tvAwayTeam.text = match.awayTeamName
+        itemView.tvHomeScore.text = match.homeScore ?: "?"
+        itemView.tvAwayScore.text = match.awayScore ?: "?"
         itemView.setOnClickListener {
             onItemClick()
         }

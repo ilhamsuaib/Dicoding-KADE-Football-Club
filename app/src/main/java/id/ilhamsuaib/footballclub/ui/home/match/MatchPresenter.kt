@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.ui.home
+package id.ilhamsuaib.footballclub.ui.home.match
 
 import id.ilhamsuaib.footballclub.base.BasePresenter
 import id.ilhamsuaib.footballclub.utilities.getResponse
@@ -16,7 +16,10 @@ class MatchPresenter : BasePresenter<ServiceCallback>() {
                     callback?.onFailed(it)
                 }, { response ->
                     response?.events?.let {
-                        callback?.showMatch(matchList = it)
+                        val matchList = it.map { match ->
+                            match.transform()
+                        }
+                        return@let callback?.showMatch(matchList = matchList)
                     }
                 })
     }

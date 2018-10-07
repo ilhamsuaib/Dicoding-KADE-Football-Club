@@ -1,5 +1,6 @@
 package id.ilhamsuaib.footballclub.base
 
+import id.ilhamsuaib.footballclub.NetworkConfig
 import id.ilhamsuaib.footballclub.data.remote.ApiService
 
 /**
@@ -7,7 +8,7 @@ import id.ilhamsuaib.footballclub.data.remote.ApiService
  * github.com/ilhamsuaib
  */
 
-open class BasePresenter<T> {
+open class BasePresenter<T: BaseServiceCallback> {
 
     protected var callback: T? = null
     protected val apiService: ApiService by lazy {

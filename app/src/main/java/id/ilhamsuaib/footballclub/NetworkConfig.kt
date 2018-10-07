@@ -1,6 +1,5 @@
-package id.ilhamsuaib.footballclub.base
+package id.ilhamsuaib.footballclub
 
-import id.ilhamsuaib.footballclub.BuildConfig
 import id.ilhamsuaib.footballclub.data.remote.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

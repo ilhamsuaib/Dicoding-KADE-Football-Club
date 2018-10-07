@@ -1,7 +1,8 @@
-package id.ilhamsuaib.footballclub.model
+package id.ilhamsuaib.footballclub.data.remote.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import id.ilhamsuaib.footballclub.model.Match
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -113,4 +114,18 @@ data class MatchModel(
         val strMap: String? = null,
         @field:SerializedName("strLocked")
         val strLocked: String? = null
-): Parcelable
+) : Parcelable {
+    fun transform(): Match {
+        return Match(
+                id = null,
+                matchId = this.idEvent,
+                homeTeamId = this.idHomeTeam,
+                awayTeamId = this.idAwayTeam,
+                homeTeamName = this.strHomeTeam,
+                awayTeamName = this.strAwayTeam,
+                homeScore = this.intHomeScore,
+                awayScore = this.intAwayScore,
+                matchDate = this.dateEvent
+        )
+    }
+}
