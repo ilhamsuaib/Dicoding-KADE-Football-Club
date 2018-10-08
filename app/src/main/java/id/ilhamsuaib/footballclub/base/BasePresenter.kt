@@ -1,6 +1,6 @@
 package id.ilhamsuaib.footballclub.base
 
-import id.ilhamsuaib.footballclub.NetworkConfig
+import id.ilhamsuaib.footballclub.utilities.NetworkConfig
 import id.ilhamsuaib.footballclub.data.remote.ApiService
 
 /**

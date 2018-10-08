@@ -35,16 +35,26 @@ class MatchDetailActivity : AppCompatActivity(), ServiceCallback {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_add_fav, menu)
         this.menu = menu
+        match?.matchId?.let {
+            presenter.checkExistenceMatch(it)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> finish()
-            R.id.menu_add_to_favorite -> presenter.addToFavorite(match)
-            R.id.menu_rem_from_favorite -> presenter.removeFromFavorite(match?.matchId)
+            R.id.menu_add_to_favorite -> {
+                match?.let {
+                    presenter.addToFavorite(it)
+                }
+            }
+            R.id.menu_rem_from_favorite -> {
+                match?.matchId?.let {
+                    presenter.removeFromFavorite(it)
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -144,5 +154,10 @@ class MatchDetailActivity : AppCompatActivity(), ServiceCallback {
         menu?.clear()
         menuInflater.inflate(R.menu.menu_add_fav, menu)
         Snackbar.make(container, getString(R.string.dihapus_dari_favorit), Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun savedAsFavorite(saved: Boolean) {
+        val resMenu = if (saved) R.menu.menu_rem_fav else R.menu.menu_add_fav
+        menuInflater.inflate(resMenu, menu)
     }
 }

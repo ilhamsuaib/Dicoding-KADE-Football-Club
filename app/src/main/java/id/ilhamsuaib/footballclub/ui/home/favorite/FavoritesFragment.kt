@@ -42,7 +42,10 @@ class FavoritesFragment : Fragment(), ServiceCallback {
             layoutManager = LinearLayoutManager(context)
             adapter = matchAdapter
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
         presenter.getFavorites()
     }
 

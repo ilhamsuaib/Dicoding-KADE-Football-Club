@@ -17,4 +17,5 @@ interface ServiceCallback : BaseServiceCallback {
     fun showAwayTeam(team: TeamModel)
     fun savedToFavorite()
     fun removedToFavorite()
+    fun savedAsFavorite(saved: Boolean)
 }

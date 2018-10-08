@@ -6,6 +6,7 @@ import id.ilhamsuaib.footballclub.data.local.entity.FavoriteEntity
 import id.ilhamsuaib.footballclub.utilities.logD
 import id.ilhamsuaib.footballclub.utilities.toJson
 import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.parseList
 import org.jetbrains.anko.db.select
 
 /**
@@ -17,10 +18,11 @@ class FavoritePresenter : BasePresenter<ServiceCallback>() {
 
     fun getFavorites() {
         BaseApp.db?.use {
-            val result = select(FavoriteEntity.FAVORITE_MATCH)
-            val favorites = result.parseList(classParser<FavoriteEntity>())
-            logD(FavoritesFragment.TAG, "favorites : ${favorites.toJson()}")
-            val matchList = favorites.map {
+            val results = select(FavoriteEntity.FAVORITE_MATCH)
+                    .exec { parseList(classParser<FavoriteEntity>()) }
+
+            logD(FavoritesFragment.TAG, "favorites : ${results.toJson()}")
+            val matchList = results.map {
                 it.transform()
             }
 

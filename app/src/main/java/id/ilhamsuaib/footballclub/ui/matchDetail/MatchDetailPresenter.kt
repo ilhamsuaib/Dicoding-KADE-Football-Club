@@ -8,7 +8,7 @@ import id.ilhamsuaib.footballclub.model.Match
 import id.ilhamsuaib.footballclub.utilities.getResponse
 import id.ilhamsuaib.footballclub.utilities.logD
 import id.ilhamsuaib.footballclub.utilities.toJson
-import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.*
 
 class MatchDetailPresenter : BasePresenter<ServiceCallback>() {
 
@@ -49,18 +49,18 @@ class MatchDetailPresenter : BasePresenter<ServiceCallback>() {
                 })
     }
 
-    fun addToFavorite(match: Match?) {
+    fun addToFavorite(match: Match) {
         try {
             BaseApp.db?.use {
                 insert(FavoriteEntity.FAVORITE_MATCH,
-                        FavoriteEntity.MATCH_ID to match?.matchId,
-                        FavoriteEntity.HOME_TEAM_ID to match?.homeTeamId,
-                        FavoriteEntity.AWAY_TEAM_ID to match?.awayTeamId,
-                        FavoriteEntity.HOME_TEAM_NAME to match?.homeTeamName,
-                        FavoriteEntity.AWAY_TEAM_NAME to match?.awayTeamName,
-                        FavoriteEntity.HOME_SCORE to match?.homeScore,
-                        FavoriteEntity.AWAY_SCORE to match?.awayScore,
-                        FavoriteEntity.MATCH_DATE to match?.matchDate)
+                        FavoriteEntity.MATCH_ID to match.matchId,
+                        FavoriteEntity.HOME_TEAM_ID to match.homeTeamId,
+                        FavoriteEntity.AWAY_TEAM_ID to match.awayTeamId,
+                        FavoriteEntity.HOME_TEAM_NAME to match.homeTeamName,
+                        FavoriteEntity.AWAY_TEAM_NAME to match.awayTeamName,
+                        FavoriteEntity.HOME_SCORE to match.homeScore,
+                        FavoriteEntity.AWAY_SCORE to match.awayScore,
+                        FavoriteEntity.MATCH_DATE to match.matchDate)
             }
             callback?.savedToFavorite()
         } catch (e: SQLiteConstraintException) {
@@ -68,7 +68,27 @@ class MatchDetailPresenter : BasePresenter<ServiceCallback>() {
         }
     }
 
-    fun removeFromFavorite(idEvent: String?) {
-        callback?.removedToFavorite()
+    fun removeFromFavorite(matchId: String) {
+        try {
+            BaseApp.db?.use {
+                delete(FavoriteEntity.FAVORITE_MATCH,
+                        "(${FavoriteEntity.MATCH_ID} = {matchId})",
+                        "matchId" to matchId)
+            }
+            callback?.removedToFavorite()
+        } catch (ex: SQLiteConstraintException) {
+            callback?.onFailed(ex.message!!)
+        }
+    }
+
+    fun checkExistenceMatch(matchId: String) {
+        BaseApp.db?.use {
+            val results = select(FavoriteEntity.FAVORITE_MATCH, FavoriteEntity.MATCH_ID)
+                    .whereArgs(FavoriteEntity.MATCH_ID + " = {${FavoriteEntity.MATCH_ID}}",
+                            FavoriteEntity.MATCH_ID to matchId)
+                    .limit(1)
+                    .exec { parseList(classParser<String>()) }
+            return@use callback?.savedAsFavorite(results.isNotEmpty())
+        }
     }
 }
