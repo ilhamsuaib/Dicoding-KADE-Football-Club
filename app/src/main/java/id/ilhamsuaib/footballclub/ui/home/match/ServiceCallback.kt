@@ -10,5 +10,4 @@ import id.ilhamsuaib.footballclub.model.Match
 
 interface ServiceCallback : BaseServiceCallback {
     fun showMatch(matchList: List<Match>)
-    fun onFailed(message: String)
 }

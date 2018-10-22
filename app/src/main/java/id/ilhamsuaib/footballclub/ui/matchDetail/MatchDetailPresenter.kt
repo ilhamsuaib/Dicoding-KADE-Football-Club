@@ -3,25 +3,32 @@ package id.ilhamsuaib.footballclub.ui.matchDetail
 import android.database.sqlite.SQLiteConstraintException
 import id.ilhamsuaib.footballclub.base.BaseApp
 import id.ilhamsuaib.footballclub.base.BasePresenter
+import id.ilhamsuaib.footballclub.data.Repository
 import id.ilhamsuaib.footballclub.data.local.entity.FavoriteEntity
 import id.ilhamsuaib.footballclub.model.Match
-import id.ilhamsuaib.footballclub.utilities.getResponse
-import id.ilhamsuaib.footballclub.utilities.logD
-import id.ilhamsuaib.footballclub.utilities.toJson
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.db.*
 
-class MatchDetailPresenter : BasePresenter<ServiceCallback>() {
+class MatchDetailPresenter(private val repo: Repository,
+                           private val backgroundScheduler: Scheduler = Schedulers.io(),
+                           private val mainScheduler: Scheduler = AndroidSchedulers.mainThread()) : BasePresenter<ServiceCallback>() {
 
     fun getMatchDetail(idEvent: String?) {
-        apiService.getMatchDetail(matchId = idEvent)
-                .getResponse({
-                    callback?.onFailed(it)
-                }, {
-                    if (it?.events?.isNotEmpty() == true)
-                        callback?.showMatchDetail(it.events[0])
-                    else
-                        callback?.onFailed("No match event found")
-                })
+        disposable.add(
+                repo.getMatchDetail(matchId = idEvent)
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .subscribe({
+                            if (it.isNotEmpty())
+                                callback?.showMatchDetail(it[0])
+                            else
+                                callback?.onFailed("No match event found")
+                        }, {
+                            callback?.onFailed(it.message!!)
+                        })
+        )
     }
 
     fun getTeamDetail(idHomeTeam: String?, idAwayTeam: String?) {
@@ -31,22 +38,25 @@ class MatchDetailPresenter : BasePresenter<ServiceCallback>() {
 
     private fun getTeam(idHomeTeam: String? = null, idAwayTeam: String? = null) {
         val teamId = idHomeTeam ?: idAwayTeam
-        apiService.getTeamDetail(teamId)
-                .getResponse({
-                    callback?.onFailed(it)
-                }, { response ->
-                    logD(s = "${response.toJson()}")
-                    if (response?.teams?.isNotEmpty() == true) {
-                        idHomeTeam?.let {
-                            callback?.showHomeTeam(response.teams[0])
-                        }
-                        idAwayTeam?.let {
-                            callback?.showAwayTeam(response.teams[0])
-                        }
-                    } else {
-                        callback?.onFailed("No team found with id : $teamId")
-                    }
-                })
+        disposable.add(
+                repo.getTeamDetail(teamId)
+                        .subscribeOn(backgroundScheduler)
+                        .observeOn(mainScheduler)
+                        .subscribe({ itemList ->
+                            if (itemList.isNotEmpty()) {
+                                idHomeTeam?.let {
+                                    callback?.showHomeTeam(itemList[0])
+                                }
+                                idAwayTeam?.let {
+                                    callback?.showAwayTeam(itemList[0])
+                                }
+                            } else {
+                                callback?.onFailed("No team found with id : $teamId")
+                            }
+                        }, {
+                            callback?.onFailed(it.message!!)
+                        })
+        )
     }
 
     fun addToFavorite(match: Match) {

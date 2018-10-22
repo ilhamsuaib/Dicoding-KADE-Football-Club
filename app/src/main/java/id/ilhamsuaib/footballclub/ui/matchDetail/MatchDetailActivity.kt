@@ -9,6 +9,7 @@ import android.view.MenuItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import id.ilhamsuaib.footballclub.R
+import id.ilhamsuaib.footballclub.data.Repository
 import id.ilhamsuaib.footballclub.data.remote.model.MatchModel
 import id.ilhamsuaib.footballclub.data.remote.model.TeamModel
 import id.ilhamsuaib.footballclub.model.Match
@@ -20,7 +21,7 @@ import org.jetbrains.anko.toast
 class MatchDetailActivity : AppCompatActivity(), ServiceCallback {
 
     private val tag = "MatchDetailActivity"
-    private val presenter = MatchDetailPresenter()
+    private val presenter = MatchDetailPresenter(Repository())
     private val detailAdapter = GroupAdapter<ViewHolder>()
     private val itemList = mutableListOf<Any>()
     private var match: Match? = null

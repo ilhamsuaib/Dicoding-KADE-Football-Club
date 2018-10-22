@@ -9,5 +9,5 @@ import com.google.gson.annotations.SerializedName
 
 class TeamResponse {
     @field:SerializedName("teams")
-    val teams: List<TeamModel>? = emptyList()
+    val teams: List<TeamModel> = emptyList()
 }
