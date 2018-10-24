@@ -19,9 +19,6 @@ class MatchDetailPresenterTest {
     @Mock
     lateinit var callback: ServiceCallback
 
-    @Mock
-    lateinit var matchModel: MatchModel
-
     private lateinit var presenter: MatchDetailPresenter
 
     @Before
@@ -35,6 +32,7 @@ class MatchDetailPresenterTest {
     fun `fetch valid data should load into view`() {
         val matchList = emptyList<MatchModel>()
         val matchId = "584435"
+        val matchModel = MatchModel()
 
         //given
         presenter.bindCallback(callback)

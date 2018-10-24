@@ -24,16 +24,6 @@ class HomeActivityTest {
 
     @Test
     fun homeActivityTest() {
-        /**
-         * skenario
-         * 1. Memastikan view pager ready
-         * 2. Swipe left view pager uk melihat tab sebelah kanan (tab ke 2)
-         * 3. Swipe left view pager uk melihat tab sebelah kanan (tab ke 3)
-         * 4. Swipe right view pager uk melihat tab sebelah kiri (tab ke 2)
-         * 5. Memastikan recycler view match ready
-         * 6. Melakukan scroll pada recycler view ke item position 10
-         * 7. Melakukan klik pada item recycler view pada item position 10
-         * */
 
         delay(3000)
         onView(withId(viewPager)).check(matches(isDisplayed()))
