@@ -1,13 +1,13 @@
 package id.ilhamsuaib.footballclub.utilities
 
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ImageView
+import android.widget.Spinner
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.squareup.picasso.Picasso
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,22 +16,17 @@ import java.util.*
  * github.com/ilhamsuaib
  */
 
-fun <T> Call<T>.getResponse(onFailure: (message: String) -> Unit = {},
-                            onResponse: (response: T?) -> Unit) {
-    this.enqueue(object : Callback<T> {
-        override fun onFailure(call: Call<T>, t: Throwable) {
-            t.printStackTrace()
-            t.message?.let { onFailure(it) }
+
+fun Spinner.addOnItemSelecterListener(onItemSelected: (position: Int) -> Unit) {
+    this.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+
         }
 
-        override fun onResponse(call: Call<T>, response: Response<T>) {
-            if (200 == response.code()) {
-                onResponse(response.body())
-            } else {
-                onFailure("Maaf, terjadi kesalahan saat membaca response dari server")
-            }
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            onItemSelected(position)
         }
-    })
+    }
 }
 
 fun Any?.toJson(): JsonElement = Gson().toJsonTree(this)

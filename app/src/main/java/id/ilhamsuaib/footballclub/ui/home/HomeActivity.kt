@@ -1,19 +1,16 @@
 package id.ilhamsuaib.footballclub.ui.home
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import id.ilhamsuaib.footballclub.R
 import id.ilhamsuaib.footballclub.ui.home.favorite.FavoritesFragment
-import id.ilhamsuaib.footballclub.ui.home.match.LastMatchFragment
-import id.ilhamsuaib.footballclub.ui.home.match.NextMatchFragment
+import id.ilhamsuaib.footballclub.ui.home.matches.HomeFragment
+import id.ilhamsuaib.footballclub.ui.home.teams.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
-
-    companion object {
-        private const val MATCH_TYPE = "matchType"
-        const val LEAGUE_ID = "4335"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,12 +20,28 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        this.title = getString(R.string.laliga_santander)
-        val pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        pagerAdapter.addFragment(LastMatchFragment(), getString(R.string.last_match))
-        pagerAdapter.addFragment(NextMatchFragment(), getString(R.string.next_match))
-        pagerAdapter.addFragment(FavoritesFragment(), getString(R.string.favorites))
-        viewPager.adapter = pagerAdapter
-        tabView.setupWithViewPager(viewPager)
+        setupFragment(HomeFragment.newInstance())
+
+        bottomNav.setOnNavigationItemSelectedListener {
+            return@setOnNavigationItemSelectedListener when (it.itemId) {
+                R.id.menu_matches -> setupFragment(HomeFragment.newInstance())
+                R.id.menu_teams -> setupFragment(TeamsFragment.newInstance())
+                R.id.menu_favorite -> setupFragment(FavoritesFragment.newInstance())
+                else -> false
+            }
+        }
+    }
+
+    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_search, menu)
+        return super.onCreateOptionsMenu(menu)
+    }*/
+
+    private fun setupFragment(fragment: Fragment): Boolean {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameContainer, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+        return true
     }
 }

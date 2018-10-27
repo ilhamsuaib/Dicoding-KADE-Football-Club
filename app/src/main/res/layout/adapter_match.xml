@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white">
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_white_radius">
 
     <TextView
         android:id="@+id/tvDateTime"
@@ -81,12 +84,4 @@
         app:layout_constraintStart_toEndOf="@+id/tvAwayScore"
         app:layout_constraintTop_toTopOf="@+id/tvVs"
         tools:text="Real Madrid" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.6dp"
-        android:background="#eee"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

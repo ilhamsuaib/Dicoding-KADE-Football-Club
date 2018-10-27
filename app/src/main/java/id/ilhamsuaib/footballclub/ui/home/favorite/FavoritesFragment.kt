@@ -10,7 +10,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import id.ilhamsuaib.footballclub.R
 import id.ilhamsuaib.footballclub.model.Match
-import id.ilhamsuaib.footballclub.ui.home.match.MatchAdapter
+import id.ilhamsuaib.footballclub.ui.home.matches.MatchAdapter
 import id.ilhamsuaib.footballclub.ui.matchDetail.MatchDetailActivity
 import id.ilhamsuaib.footballclub.utilities.Const
 import kotlinx.android.synthetic.main.fragment_favorite.view.*
@@ -25,6 +25,7 @@ class FavoritesFragment : Fragment(), ServiceCallback {
 
     companion object {
         const val TAG = "FavoritesFragment"
+        fun newInstance() = FavoritesFragment()
     }
 
     private val presenter = FavoritePresenter()

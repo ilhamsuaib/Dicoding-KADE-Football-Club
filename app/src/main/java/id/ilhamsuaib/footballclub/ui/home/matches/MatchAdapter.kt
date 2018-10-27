@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.ui.home.match
+package id.ilhamsuaib.footballclub.ui.home.matches
 
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder

@@ -1,6 +1,5 @@
 package id.ilhamsuaib.footballclub.base
 
-import id.ilhamsuaib.footballclub.data.Repository
 import io.reactivex.disposables.CompositeDisposable
 
 /**

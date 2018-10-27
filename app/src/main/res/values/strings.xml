@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Football Club</string>
+    <string name="app_name">Football App</string>
     <string name="vs">vs</string>
     <string name="goals">goals</string>
     <string name="shots">shots</string>
@@ -11,11 +11,14 @@
     <string name="match_detail">Match Detail</string>
     <string name="lineups">Lineups</string>
     <string name="laliga_santander">La Liga Santander</string>
-    <string name="last_match">Last Match</string>
-    <string name="next_match">Next Match</string>
+    <string name="last">Last</string>
+    <string name="next">Next</string>
     <string name="favorites">Faforites</string>
     <string name="tambah_ke_favorit">Tambah ke favorit</string>
     <string name="hapus_dari_favorit">Hapus dari favorit</string>
     <string name="ditambahkan_ke_favorit">Ditambahkan ke favorit</string>
     <string name="dihapus_dari_favorit">Dihapus dari favorit</string>
+    <string name="search">Search</string>
+    <string name="matches">Matches</string>
+    <string name="teams">Teams</string>
 </resources>

@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.ui.home.match
+package id.ilhamsuaib.footballclub.ui.home.matches
 
 import id.ilhamsuaib.footballclub.base.BaseServiceCallback
 import id.ilhamsuaib.footballclub.model.Match
@@ -10,4 +10,5 @@ import id.ilhamsuaib.footballclub.model.Match
 
 interface ServiceCallback : BaseServiceCallback {
     fun showMatch(matchList: List<Match>)
+    fun showProgress(show: Boolean)
 }

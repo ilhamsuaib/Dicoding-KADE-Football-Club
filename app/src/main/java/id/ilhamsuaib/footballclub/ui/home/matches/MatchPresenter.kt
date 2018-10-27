@@ -1,4 +1,4 @@
-package id.ilhamsuaib.footballclub.ui.home.match
+package id.ilhamsuaib.footballclub.ui.home.matches
 
 import id.ilhamsuaib.footballclub.base.BasePresenter
 import id.ilhamsuaib.footballclub.data.Repository
@@ -16,14 +16,19 @@ class MatchPresenter(private val repo: Repository,
                      private val backgroundScheduler: Scheduler = Schedulers.io(),
                      private val mainScheduler: Scheduler = AndroidSchedulers.mainThread()) : BasePresenter<ServiceCallback>() {
 
-    fun getMatch(matchType: String?, leagueId: String = HomeActivity.LEAGUE_ID) {
-        disposable.add(
-                repo.getMatch(matchType, leagueId)
-                        .subscribeOn(backgroundScheduler)
-                        .observeOn(mainScheduler)
-                        .subscribe({
-                            callback?.showMatch(matchList = it)
-                        }, Throwable::printStackTrace)
-        )
+    fun getMatch(matchType: String?, leagueId: String) {
+        callback?.showProgress(true)
+        val obs = repo.getMatch(matchType, leagueId)
+                .subscribeOn(backgroundScheduler)
+                .observeOn(mainScheduler)
+                .subscribe({
+                    callback?.showProgress(false)
+                    callback?.showMatch(matchList = it)
+                }, {
+                    it.printStackTrace()
+                    callback?.showProgress(false)
+                })
+
+        disposable.add(obs)
     }
 }
