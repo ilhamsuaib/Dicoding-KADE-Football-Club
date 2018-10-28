@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import id.ilhamsuaib.footballclub.R
-import id.ilhamsuaib.footballclub.ui.home.ViewPagerAdapter
+import id.ilhamsuaib.footballclub.utilities.ViewPagerAdapter
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 /**

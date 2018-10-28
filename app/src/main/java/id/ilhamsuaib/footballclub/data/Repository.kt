@@ -4,6 +4,8 @@ import id.ilhamsuaib.footballclub.data.remote.ApiService
 import id.ilhamsuaib.footballclub.data.remote.model.MatchModel
 import id.ilhamsuaib.footballclub.data.remote.model.TeamModel
 import id.ilhamsuaib.footballclub.model.Match
+import id.ilhamsuaib.footballclub.model.Player
+import id.ilhamsuaib.footballclub.model.Team
 import id.ilhamsuaib.footballclub.utilities.NetworkConfig
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -38,5 +40,27 @@ class Repository {
     fun getTeamDetail(teamId: String?): Observable<List<TeamModel>> {
         return apiService.getTeamDetail(teamId)
                 .map { it.teams }
+    }
+
+    fun getTeams(strLeague: String): Single<List<Team>> {
+        return apiService.getLeagueTeams(strLeague)
+                .flatMapIterable {
+                    it.teams
+                }
+                .map {
+                    it.transform()
+                }
+                .toList()
+    }
+
+    fun getTeamPlayer(idTeam: String?): Single<List<Player>> {
+        return apiService.getTeamPlayers(idTeam)
+                .flatMapIterable {
+                    it.player
+                }
+                .map {
+                    it.transform()
+                }
+                .toList()
     }
 }

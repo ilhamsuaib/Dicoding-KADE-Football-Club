@@ -21,4 +21,8 @@
     <string name="search">Search</string>
     <string name="matches">Matches</string>
     <string name="teams">Teams</string>
+    <string name="overview">Overview</string>
+    <string name="players">Players</string>
+    <string name="wight_kg">Wight (Kg)</string>
+    <string name="height_m">Height (m)</string>
 </resources>

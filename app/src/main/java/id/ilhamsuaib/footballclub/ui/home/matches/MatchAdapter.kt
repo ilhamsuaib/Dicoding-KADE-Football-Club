@@ -5,7 +5,7 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import id.ilhamsuaib.footballclub.R
 import id.ilhamsuaib.footballclub.model.Match
 import id.ilhamsuaib.footballclub.utilities.parseDate
-import kotlinx.android.synthetic.main.adapter_match.view.*
+import kotlinx.android.synthetic.main.item_match.view.*
 
 /**
  * Created by @ilhamsuaib on 05/10/18.
@@ -27,5 +27,5 @@ class MatchAdapter(private val match: Match,
         }
     }
 
-    override fun getLayout(): Int = R.layout.adapter_match
+    override fun getLayout(): Int = R.layout.item_match
 }

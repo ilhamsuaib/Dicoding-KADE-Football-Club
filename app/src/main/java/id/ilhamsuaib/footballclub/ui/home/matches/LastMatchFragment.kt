@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.*
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
@@ -17,7 +16,6 @@ import id.ilhamsuaib.footballclub.utilities.Const
 import id.ilhamsuaib.footballclub.utilities.addOnItemSelecterListener
 import id.ilhamsuaib.footballclub.utilities.logD
 import kotlinx.android.synthetic.main.fragment_last_match.view.*
-import org.jetbrains.anko.sdk27.coroutines.onItemClick
 import org.jetbrains.anko.support.v4.startActivity
 
 /**
@@ -30,6 +28,7 @@ class LastMatchFragment : Fragment(), ServiceCallback {
     companion object {
         private const val TAG = "LastMatchFragment"
     }
+
     private val presenter = MatchPresenter(Repository())
     private val matchAdapter = GroupAdapter<ViewHolder>()
     private val matchList = mutableListOf<Match>()
@@ -121,13 +120,12 @@ class LastMatchFragment : Fragment(), ServiceCallback {
         })
 
         val searchView = searchItem?.actionView as SearchView
-        setSearchViewListener(searchView)
+        searchView.setOnQueryTextListener(queryTextListener())
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun setSearchViewListener(searchView: SearchView) {
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    private fun queryTextListener(): SearchView.OnQueryTextListener? {
+        return object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String?): Boolean {
                 logD(TAG, "onQueryTextSubmit : $s")
                 filterAdapterItem(s?.toLowerCase())
@@ -139,7 +137,7 @@ class LastMatchFragment : Fragment(), ServiceCallback {
                 filterAdapterItem(s?.toLowerCase())
                 return false
             }
-        })
+        }
     }
 
     private fun filterAdapterItem(s: String?) {
@@ -148,7 +146,7 @@ class LastMatchFragment : Fragment(), ServiceCallback {
         }
         val newMatchList = matchList.filter {
             " ${it.homeTeamName}".toLowerCase().contains(" ${s?.toLowerCase()}") ||
-            " ${it.awayTeamName}".toLowerCase().contains(" ${s?.toLowerCase()}")
+                    " ${it.awayTeamName}".toLowerCase().contains(" ${s?.toLowerCase()}")
         }
 
         setAdapterItems(newMatchList)

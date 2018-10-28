@@ -10,6 +10,8 @@ import id.ilhamsuaib.footballclub.model.League
 object Const {
 
     const val MATCH = "match"
+    const val TEAM = "team"
+    const val PLAYER = "player"
 
     val LEAGUES = listOf(
             League("4335", "Spanish La Liga"),

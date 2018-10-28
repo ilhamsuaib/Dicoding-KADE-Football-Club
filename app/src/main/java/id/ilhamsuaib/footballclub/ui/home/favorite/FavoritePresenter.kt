@@ -21,7 +21,7 @@ class FavoritePresenter : BasePresenter<ServiceCallback>() {
             val results = select(FavoriteEntity.FAVORITE_MATCH)
                     .exec { parseList(classParser<FavoriteEntity>()) }
 
-            logD(FavoritesFragment.TAG, "favorites : ${results.toJson()}")
+            logD(FavMatchesFragment.TAG, "favorites : ${results.toJson()}")
             val matchList = results.map {
                 it.transform()
             }

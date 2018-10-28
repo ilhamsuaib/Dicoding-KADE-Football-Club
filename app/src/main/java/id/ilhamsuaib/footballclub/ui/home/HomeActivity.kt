@@ -3,9 +3,9 @@ package id.ilhamsuaib.footballclub.ui.home
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import id.ilhamsuaib.footballclub.R
-import id.ilhamsuaib.footballclub.ui.home.favorite.FavoritesFragment
+import id.ilhamsuaib.footballclub.ui.home.favorite.FavMatchesFragment
+import id.ilhamsuaib.footballclub.ui.home.favorite.FavoriteFragment
 import id.ilhamsuaib.footballclub.ui.home.matches.HomeFragment
 import id.ilhamsuaib.footballclub.ui.home.teams.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener when (it.itemId) {
                 R.id.menu_matches -> setupFragment(HomeFragment.newInstance())
                 R.id.menu_teams -> setupFragment(TeamsFragment.newInstance())
-                R.id.menu_favorite -> setupFragment(FavoritesFragment.newInstance())
+                R.id.menu_favorite -> setupFragment(FavoriteFragment.newInstance())
                 else -> false
             }
         }

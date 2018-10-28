@@ -1,6 +1,7 @@
 package id.ilhamsuaib.footballclub.data.remote.model
 
 import com.google.gson.annotations.SerializedName
+import id.ilhamsuaib.footballclub.model.Team
 
 /**
  * Created by @ilhamsuaib on 06/10/18.
@@ -10,15 +11,16 @@ import com.google.gson.annotations.SerializedName
 data class TeamModel(
         @field:SerializedName("idTeam") val idTeam: String?,
         @field:SerializedName("idSoccerXML") val idSoccerXML: String?,
-        @field:SerializedName("intLoved") val intLoved: Any?,
+        @field:SerializedName("intLoved") val intLoved: String?,
         @field:SerializedName("strTeam") val strTeam: String?,
-        @field:SerializedName("strTeamShort") val strTeamShort: Any?,
+        @field:SerializedName("strTeamShort") val strTeamShort: String?,
         @field:SerializedName("strAlternate") val strAlternate: String?,
         @field:SerializedName("intFormedYear") val intFormedYear: String?,
         @field:SerializedName("strSport") val strSport: String?,
         @field:SerializedName("strLeague") val strLeague: String?,
         @field:SerializedName("idLeague") val idLeague: String?,
-        @field:SerializedName("strDivision") val strDivision: Any?,
+        @field:SerializedName("strDivision") val strDivision: String?,
+        @field:SerializedName("strDescriptionEN") val strDescriptionEN: String?,
         @field:SerializedName("strManager") val strManager: String?,
         @field:SerializedName("strStadium") val strStadium: String?,
         @field:SerializedName("strKeywords") val strKeywords: String?,
@@ -43,4 +45,13 @@ data class TeamModel(
         @field:SerializedName("strTeamBanner") val strTeamBanner: String?,
         @field:SerializedName("strYoutube") val strYoutube: String?,
         @field:SerializedName("strLocked") val strLocked: String?
-)
+) {
+    fun transform() = Team(
+            idTeam = idTeam,
+            strTeam = strTeam,
+            strTeamBadge = strTeamBadge,
+            intFormedYear = intFormedYear,
+            strStadium = strStadium,
+            strDescriptionEN = strDescriptionEN
+    )
+}

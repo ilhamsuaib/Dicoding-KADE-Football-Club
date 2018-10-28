@@ -16,7 +16,6 @@ import id.ilhamsuaib.footballclub.utilities.Const
 import id.ilhamsuaib.footballclub.utilities.addOnItemSelecterListener
 import id.ilhamsuaib.footballclub.utilities.logD
 import kotlinx.android.synthetic.main.fragment_next_match.view.*
-import org.jetbrains.anko.sdk27.coroutines.onItemClick
 import org.jetbrains.anko.support.v4.startActivity
 
 /**
@@ -29,8 +28,10 @@ class NextMatchFragment : Fragment(), ServiceCallback {
     companion object {
         private const val TAG = "NextMatchFragment"
     }
+
     private val presenter = MatchPresenter(Repository())
     private val matchAdapter = GroupAdapter<ViewHolder>()
+    private val matchList = mutableListOf<Match>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter.bindCallback(this)
@@ -76,6 +77,24 @@ class NextMatchFragment : Fragment(), ServiceCallback {
     }
 
     override fun showMatch(matchList: List<Match>) {
+        this.matchList.clear()
+        this.matchList.addAll(matchList)
+        setAdapterItems(matchList)
+    }
+
+    private fun filterAdapterItem(s: String?) {
+        if (s.isNullOrBlank()) {
+            return
+        }
+        val newMatchList = matchList.filter {
+            " ${it.homeTeamName}".toLowerCase().contains(" ${s?.toLowerCase()}") ||
+                    " ${it.awayTeamName}".toLowerCase().contains(" ${s?.toLowerCase()}")
+        }
+
+        setAdapterItems(newMatchList)
+    }
+
+    private fun setAdapterItems(matchList: List<Match>) {
         matchAdapter.clear()
         matchList.forEach {
             matchAdapter.add(MatchAdapter(it) {
@@ -97,19 +116,42 @@ class NextMatchFragment : Fragment(), ServiceCallback {
         menu?.clear()
         inflater?.inflate(R.menu.menu_search, menu)
         val searchItem = menu?.findItem(R.id.menu_search)
-        val searchView = searchItem?.actionView as SearchView
+        searchItem?.setOnActionExpandListener(actionExpandListener())
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        val searchView = searchItem?.actionView as SearchView
+        searchView.setOnQueryTextListener(queryTextListener())
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun actionExpandListener(): MenuItem.OnActionExpandListener? {
+        return object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                logD(TAG, "onMenuItemActionExpand : ")
+                setAdapterItems(emptyList())
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                logD(TAG, "onMenuItemActionCollapse : ")
+                setAdapterItems(matchList)
+                return true
+            }
+        }
+    }
+
+    private fun queryTextListener(): SearchView.OnQueryTextListener? {
+        return object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String?): Boolean {
                 logD(TAG, "onQueryTextSubmit : $s")
+                filterAdapterItem(s?.toLowerCase())
                 return false
             }
 
             override fun onQueryTextChange(s: String?): Boolean {
                 logD(TAG, "onQueryTextChange : $s")
+                filterAdapterItem(s?.toLowerCase())
                 return false
             }
-        })
-        super.onCreateOptionsMenu(menu, inflater)
+        }
     }
 }
