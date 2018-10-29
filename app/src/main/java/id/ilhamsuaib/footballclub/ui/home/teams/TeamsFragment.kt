@@ -13,7 +13,7 @@ import id.ilhamsuaib.footballclub.data.Repository
 import id.ilhamsuaib.footballclub.model.Team
 import id.ilhamsuaib.footballclub.ui.teamDetail.TeamDetailActivity
 import id.ilhamsuaib.footballclub.utilities.Const
-import id.ilhamsuaib.footballclub.utilities.addOnItemSelecterListener
+import id.ilhamsuaib.footballclub.utilities.addOnItemSelectedListener
 import kotlinx.android.synthetic.main.fragment_teams.view.*
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -47,7 +47,7 @@ class TeamsFragment : Fragment(), ServiceCallback {
         val spinnerAdapter = ArrayAdapter<String>(view.context, android.R.layout.simple_spinner_dropdown_item, getLeagueList())
         view.spLeague.apply {
             adapter = spinnerAdapter
-            addOnItemSelecterListener {
+            addOnItemSelectedListener {
                 getTeamsByLeague(strLeague = Const.LEAGUES[it].strLeague)
             }
         }

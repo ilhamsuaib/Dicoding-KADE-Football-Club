@@ -4,6 +4,8 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import id.ilhamsuaib.footballclub.model.Match
 import kotlinx.android.parcel.Parcelize
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by @ilhamsuaib on 05/10/18.
@@ -125,7 +127,15 @@ data class MatchModel(
                 awayTeamName = this.strAwayTeam,
                 homeScore = this.intHomeScore,
                 awayScore = this.intAwayScore,
+                strTime = toWib(this.strTime),
                 matchDate = this.dateEvent
         )
+    }
+
+    private fun toWib(strTime: String?): String {
+        val sdf = SimpleDateFormat("HH:mm:ssX", Locale.getDefault())
+        val newTime = sdf.parse(strTime)
+        val newSdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+        return newSdf.format(newTime)
     }
 }

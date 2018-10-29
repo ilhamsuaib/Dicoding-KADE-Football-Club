@@ -1,6 +1,8 @@
 package id.ilhamsuaib.footballclub.ui.home.matches
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
@@ -13,7 +15,8 @@ import id.ilhamsuaib.footballclub.data.Repository
 import id.ilhamsuaib.footballclub.model.Match
 import id.ilhamsuaib.footballclub.ui.matchDetail.MatchDetailActivity
 import id.ilhamsuaib.footballclub.utilities.Const
-import id.ilhamsuaib.footballclub.utilities.addOnItemSelecterListener
+import id.ilhamsuaib.footballclub.utilities.addOnItemSelectedListener
+import id.ilhamsuaib.footballclub.utilities.getTimeMillis
 import id.ilhamsuaib.footballclub.utilities.logD
 import kotlinx.android.synthetic.main.fragment_next_match.view.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -49,7 +52,7 @@ class NextMatchFragment : Fragment(), ServiceCallback {
         val spinnerAdapter = ArrayAdapter<String>(view.context, android.R.layout.simple_spinner_dropdown_item, getLeagueList())
         view.spLeague.apply {
             adapter = spinnerAdapter
-            addOnItemSelecterListener {
+            addOnItemSelectedListener {
                 getMatchList(position = it)
             }
         }
@@ -97,10 +100,26 @@ class NextMatchFragment : Fragment(), ServiceCallback {
     private fun setAdapterItems(matchList: List<Match>) {
         matchAdapter.clear()
         matchList.forEach {
-            matchAdapter.add(MatchAdapter(it) {
-                startActivity<MatchDetailActivity>(Const.MATCH to it)
-            })
+            matchAdapter.add(MatchAdapter(match = it, isAlarm = true,
+                    addToCalendar = {
+                        addToCalendar(it)
+                    }, onItemClick = {
+                        startActivity<MatchDetailActivity>(Const.MATCH to it)
+                    }
+            ))
         }
+    }
+
+    private fun addToCalendar(match: Match) {
+        val dateTime = "${match.matchDate} ${match.strTime}"
+        val intent = Intent(Intent.ACTION_EDIT).apply {
+            type = "vnd.android.cursor.item/event"
+            putExtra(CalendarContract.Events.TITLE, "${match.homeTeamName} vs ${match.awayTeamName}")
+            putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, dateTime.getTimeMillis())
+            putExtra(CalendarContract.EXTRA_EVENT_END_TIME, dateTime.getTimeMillis().plus(3600000))
+            putExtra(CalendarContract.Events.ALL_DAY, false)
+        }
+        startActivity(intent)
     }
 
     override fun showProgress(show: Boolean) {

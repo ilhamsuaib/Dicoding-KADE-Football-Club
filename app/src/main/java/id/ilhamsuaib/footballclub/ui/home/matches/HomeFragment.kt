@@ -27,8 +27,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val pagerAdapter = ViewPagerAdapter(childFragmentManager)
-        pagerAdapter.addFragment(LastMatchFragment(), getString(R.string.last))
         pagerAdapter.addFragment(NextMatchFragment(), getString(R.string.next))
+        pagerAdapter.addFragment(LastMatchFragment(), getString(R.string.last))
         view.viewPager.adapter = pagerAdapter
         view.tabView.setupWithViewPager(view.viewPager)
     }

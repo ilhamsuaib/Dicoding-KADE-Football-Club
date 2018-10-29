@@ -17,4 +17,5 @@ data class Match(val id: Long?,
                  val awayTeamName: String?,
                  val homeScore: String?,
                  val awayScore: String?,
+                 val strTime: String?,
                  val matchDate: String?): Parcelable

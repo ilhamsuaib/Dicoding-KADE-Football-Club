@@ -1,6 +1,8 @@
 package id.ilhamsuaib.footballclub.ui.home.matches
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
@@ -13,7 +15,8 @@ import id.ilhamsuaib.footballclub.data.Repository
 import id.ilhamsuaib.footballclub.model.Match
 import id.ilhamsuaib.footballclub.ui.matchDetail.MatchDetailActivity
 import id.ilhamsuaib.footballclub.utilities.Const
-import id.ilhamsuaib.footballclub.utilities.addOnItemSelecterListener
+import id.ilhamsuaib.footballclub.utilities.addOnItemSelectedListener
+import id.ilhamsuaib.footballclub.utilities.getTimeMillis
 import id.ilhamsuaib.footballclub.utilities.logD
 import kotlinx.android.synthetic.main.fragment_last_match.view.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -49,7 +52,7 @@ class LastMatchFragment : Fragment(), ServiceCallback {
         val spinnerAdapter = ArrayAdapter<String>(view.context, android.R.layout.simple_spinner_dropdown_item, getLeagueList())
         view.spLeague.apply {
             adapter = spinnerAdapter
-            addOnItemSelecterListener {
+            addOnItemSelectedListener {
                 getMatchList(position = it)
             }
         }
@@ -85,9 +88,11 @@ class LastMatchFragment : Fragment(), ServiceCallback {
     private fun setAdapterItems(matchList: List<Match>) {
         matchAdapter.clear()
         matchList.forEach {
-            matchAdapter.add(MatchAdapter(it) {
-                startActivity<MatchDetailActivity>(Const.MATCH to it)
-            })
+            matchAdapter.add(
+                    MatchAdapter(it) {
+                        startActivity<MatchDetailActivity>(Const.MATCH to it)
+                    }
+            )
         }
     }
 

@@ -46,7 +46,6 @@ class TeamPlayersFragment : Fragment(), ServiceCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupView(view)
         val idTeam = arguments?.getString(CLUB_ID)
         presenter.getTeamPlayers(idTeam)

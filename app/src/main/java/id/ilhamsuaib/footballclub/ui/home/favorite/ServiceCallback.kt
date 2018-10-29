@@ -2,6 +2,7 @@ package id.ilhamsuaib.footballclub.ui.home.favorite
 
 import id.ilhamsuaib.footballclub.base.BaseServiceCallback
 import id.ilhamsuaib.footballclub.model.Match
+import id.ilhamsuaib.footballclub.model.Team
 
 /**
  * Created by @ilhamsuaib on 08/10/18.
@@ -9,5 +10,6 @@ import id.ilhamsuaib.footballclub.model.Match
  */
 
 interface ServiceCallback : BaseServiceCallback {
-    fun showFavorites(matchList: List<Match>)
+    fun showFavoriteMatches(matchList: List<Match>) {}
+    fun showFavoriteTeams(teamList: List<Team>) {}
 }

@@ -44,10 +44,10 @@ class FavMatchesFragment : Fragment(), ServiceCallback {
 
     override fun onResume() {
         super.onResume()
-        presenter.getFavorites()
+        presenter.getFavoriteMatches()
     }
 
-    override fun showFavorites(matchList: List<Match>) {
+    override fun showFavoriteMatches(matchList: List<Match>) {
         matchAdapter.clear()
         matchList.forEach {
             matchAdapter.add(MatchAdapter(it) {

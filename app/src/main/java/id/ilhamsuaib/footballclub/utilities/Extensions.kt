@@ -17,7 +17,7 @@ import java.util.*
  */
 
 
-fun Spinner.addOnItemSelecterListener(onItemSelected: (position: Int) -> Unit) {
+fun Spinner.addOnItemSelectedListener(onItemSelected: (position: Int) -> Unit) {
     this.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -40,9 +40,17 @@ fun String.parseDate(pattern: String): String {
     logD(s = "old date $this")
     val sdf = SimpleDateFormat(pattern, Locale.getDefault())
     val date = sdf.parse(this)
-    logD(s = "old date $date")
+    logD(s = "new date $date")
     val newSdf = SimpleDateFormat("E, dd MMM yyyy", Locale.getDefault())
     return newSdf.format(date)
+}
+
+fun String.getTimeMillis(): Long {
+    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+    val date = sdf.parse(this)
+    val calendar = Calendar.getInstance()
+    calendar.time = date
+    return calendar.timeInMillis
 }
 
 fun logD(tag: String = "logD", s: String?) {

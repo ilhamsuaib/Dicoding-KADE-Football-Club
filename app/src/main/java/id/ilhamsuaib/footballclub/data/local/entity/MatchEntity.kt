@@ -7,15 +7,16 @@ import id.ilhamsuaib.footballclub.model.Match
  * github.com/ilhamsuaib
  */
 
-data class FavoriteEntity(val id: Long?,
-                          val matchId: String?,
-                          val homeTeamId: String?,
-                          val awayTeamId: String?,
-                          val homeTeamName: String?,
-                          val awayTeamName: String?,
-                          val homeScore: String?,
-                          val awayScore: String?,
-                          val matchDate: String?) {
+data class MatchEntity(val id: Long?,
+                       val matchId: String?,
+                       val homeTeamId: String?,
+                       val awayTeamId: String?,
+                       val homeTeamName: String?,
+                       val awayTeamName: String?,
+                       val homeScore: String?,
+                       val awayScore: String?,
+                       val matchDate: String?,
+                       val matchTime: String?) {
 
     companion object {
         const val FAVORITE_MATCH: String = "FAVORITE_MATCH"
@@ -28,6 +29,7 @@ data class FavoriteEntity(val id: Long?,
         const val HOME_SCORE: String = "HOME_SCORE"
         const val AWAY_SCORE: String = "AWAY_SCORE"
         const val MATCH_DATE: String = "MATCH_DATE"
+        const val MATCH_TIME: String = "MATCH_TIME"
     }
 
     fun transform(): Match {
@@ -40,6 +42,7 @@ data class FavoriteEntity(val id: Long?,
                 awayTeamName = this.awayTeamName,
                 homeScore = this.homeScore,
                 awayScore = this.awayScore,
+                strTime = this.matchTime,
                 matchDate = this.matchDate
         )
     }

@@ -9,6 +9,10 @@ import id.ilhamsuaib.footballclub.model.Player
  */
 
 interface ServiceCallback : BaseServiceCallback {
-    fun showPlayers(playerList: List<Player>)
-    fun showProgress(show: Boolean)
+    fun showPlayers(playerList: List<Player>) {}
+    fun showProgress(show: Boolean) {}
+    fun savedAsFavorite(b: Boolean) {}
+    fun onAddedToFavorite() {}
+    fun onRemovedFromFavorite() {}
+    fun showTeamOverview(overview: String) {}
 }
