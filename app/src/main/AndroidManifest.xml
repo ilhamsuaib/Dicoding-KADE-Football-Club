@@ -28,6 +28,7 @@
         <activity
             android:name=".ui.teamDetail.TeamDetailActivity"
             android:theme="@style/NoToolbar" />
+        <activity android:name=".ui.searchMatch.SearchMatchActivity"/>
     </application>
 
 </manifest>

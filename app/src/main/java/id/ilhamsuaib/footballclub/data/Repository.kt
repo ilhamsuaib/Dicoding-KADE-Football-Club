@@ -63,4 +63,18 @@ class Repository {
                 }
                 .toList()
     }
+
+    fun searchTeam(s: String?): Single<List<Team>> {
+        return apiService.searchTeam(s)
+                .flatMapIterable { it.teams }
+                .map { it.transform() }
+                .toList()
+    }
+
+    fun searchMatch(s: String?): Single<List<Match>> {
+        return apiService.searchMatch(s)
+                .flatMapIterable { it.event }
+                .map { it.transform() }
+                .toList()
+    }
 }

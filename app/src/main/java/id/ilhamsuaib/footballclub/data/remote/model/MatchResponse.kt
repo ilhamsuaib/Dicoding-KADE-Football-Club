@@ -9,5 +9,8 @@ import com.google.gson.annotations.SerializedName
 
 data class MatchResponse(
         @field:SerializedName("events")
-        val events: List<MatchModel> = emptyList()
+        val events: List<MatchModel> = emptyList(),
+
+        @field:SerializedName("event")
+        val event: List<MatchModel> = emptyList()
 )

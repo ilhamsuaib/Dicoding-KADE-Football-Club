@@ -11,4 +11,5 @@ import id.ilhamsuaib.footballclub.model.Team
 interface ServiceCallback : BaseServiceCallback {
     fun showTeams(teamList: List<Team>)
     fun showProgress(show: Boolean)
+    fun showSearchResult(teamList: List<Team>)
 }

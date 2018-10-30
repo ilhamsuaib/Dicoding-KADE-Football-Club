@@ -104,12 +104,12 @@ class TeamsFragment : Fragment(), ServiceCallback {
     private fun queryTextListener(): SearchView.OnQueryTextListener? {
         return object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String?): Boolean {
-                filterAdapterItem(s?.toLowerCase())
+                presenter.searchTeam(s)
                 return false
             }
 
             override fun onQueryTextChange(s: String?): Boolean {
-                filterAdapterItem(s?.toLowerCase())
+                presenter.searchTeam(s)
                 return false
             }
         }
@@ -119,29 +119,24 @@ class TeamsFragment : Fragment(), ServiceCallback {
         return object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
                 setAdapterItems(emptyList())
+                view?.spLeague?.visibility = View.GONE
                 return true
             }
 
             override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
                 setAdapterItems(teamList)
+                view?.spLeague?.visibility = View.VISIBLE
                 return true
             }
         }
     }
 
-    private fun filterAdapterItem(s: String?) {
-        if (s.isNullOrBlank()) {
-            return
-        }
-        val newMatchList = teamList.filter {
-            " ${it.strTeam}".toLowerCase().contains(" ${s?.toLowerCase()}") ||
-                    " ${it.strTeam}".toLowerCase().contains(" ${s?.toLowerCase()}")
-        }
-        setAdapterItems(newMatchList)
-    }
-
     override fun onDestroy() {
         presenter.unbind()
         super.onDestroy()
+    }
+
+    override fun showSearchResult(teamList: List<Team>) {
+        setAdapterItems(teamList)
     }
 }

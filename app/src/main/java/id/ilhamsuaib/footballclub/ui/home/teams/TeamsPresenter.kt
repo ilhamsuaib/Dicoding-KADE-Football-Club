@@ -30,4 +30,21 @@ class TeamsPresenter(private val repo: Repository,
 
         disposable.add(obs)
     }
+
+    fun searchTeam(s: String?) {
+        if (s.isNullOrBlank()) return
+        callback?.showProgress(true)
+        val obs = repo.searchTeam(s)
+                .subscribeOn(backgroundScheduler)
+                .observeOn(mainScheduler)
+                .subscribe({
+                    callback?.showSearchResult(it)
+                    callback?.showProgress(false)
+                }, {
+                    it.printStackTrace()
+                    callback?.showProgress(false)
+                })
+
+        disposable.add(obs)
+    }
 }

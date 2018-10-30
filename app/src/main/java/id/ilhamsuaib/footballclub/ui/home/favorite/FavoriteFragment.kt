@@ -32,8 +32,8 @@ class FavoriteFragment : Fragment() {
         val pagerAdapter = ViewPagerAdapter(childFragmentManager)
         pagerAdapter.addFragment(FavMatchesFragment.newInstance(), getString(R.string.matches))
         pagerAdapter.addFragment(FavTeamsFragment.newInstance(), getString(R.string.teams))
-        view.viewPager.adapter = pagerAdapter
-        view.tabLayout.setupWithViewPager(view.viewPager)
+        view.viewPagerFavorites.adapter = pagerAdapter
+        view.tabLayout.setupWithViewPager(view.viewPagerFavorites)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

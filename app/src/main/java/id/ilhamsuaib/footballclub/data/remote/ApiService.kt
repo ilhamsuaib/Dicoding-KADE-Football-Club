@@ -32,4 +32,10 @@ interface ApiService {
 
     @GET("api/v1/json/${BuildConfig.API_KEY}/lookup_all_players.php")
     fun getTeamPlayers(@Query("id") idTeam: String?): Observable<PlayerResponse>
+
+    @GET("api/v1/json/${BuildConfig.API_KEY}/searchteams.php")
+    fun searchTeam(@Query("t") teamName: String?): Observable<TeamResponse>
+
+    @GET("api/v1/json/${BuildConfig.API_KEY}/searchevents.php")
+    fun searchMatch(@Query("e") eventName: String?): Observable<MatchResponse>
 }

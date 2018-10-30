@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import id.ilhamsuaib.footballclub.model.Match
 import kotlinx.android.parcel.Parcelize
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -132,10 +133,21 @@ data class MatchModel(
         )
     }
 
-    private fun toWib(strTime: String?): String {
-        val sdf = SimpleDateFormat("HH:mm:ssX", Locale.getDefault())
-        val newTime = sdf.parse(strTime)
-        val newSdf = SimpleDateFormat("HH:mm", Locale.getDefault())
-        return newSdf.format(newTime)
+    private fun toWib(strTime: String?): String? {
+        return try {
+            val sdf = SimpleDateFormat("HH:mm:ssX", Locale.getDefault())
+            val newTime = sdf.parse(strTime)
+            val newSdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+            newSdf.format(newTime)
+        } catch (e: ParseException) {
+            try {
+                val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+                val newTime = sdf.parse(strTime)
+                val newSdf = SimpleDateFormat("HH:mm", Locale.getDefault())
+                newSdf.format(newTime)
+            } catch (e: ParseException) {
+                strTime
+            }
+        }
     }
 }
