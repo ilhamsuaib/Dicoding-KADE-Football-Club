@@ -4,15 +4,12 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
-import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
 import id.ilhamsuaib.footballclub.R.id.*
-import org.hamcrest.Matcher
-import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -43,7 +40,8 @@ class HomeActivityTest {
          * 13. Swipe ke tab next
          * 14. Pastikan recycler view ready
          * 15. Scroll ke item 10
-         * 16. Click item ke 10
+         * 16. Scroll ke item 1
+         * 17. Click item ke 1
          * */
 
         delay(3000)
