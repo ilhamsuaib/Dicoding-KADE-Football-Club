@@ -36,6 +36,10 @@ class FavTeamsFragment : Fragment(), ServiceCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView(view)
+    }
+
+    override fun onResume() {
+        super.onResume()
         presenter.getFavoriteTeams()
     }
 
@@ -47,6 +51,7 @@ class FavTeamsFragment : Fragment(), ServiceCallback {
     }
 
     override fun showFavoriteTeams(teamList: List<Team>) {
+        favTeamAdapter.clear()
         teamList.forEach {
             favTeamAdapter.add(TeamAdapter(it) {
                 startActivity<TeamDetailActivity>(Const.TEAM to it)
