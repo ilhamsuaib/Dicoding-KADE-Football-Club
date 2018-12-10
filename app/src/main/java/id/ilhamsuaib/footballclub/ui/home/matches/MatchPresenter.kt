@@ -24,6 +24,7 @@ class MatchPresenter(private val repo: Repository,
                 .subscribe({
                     callback?.showProgress(false)
                     callback?.showMatch(matchList = it)
+                    HomeActivity.idlingResourceCounter = 0
                 }, {
                     it.printStackTrace()
                     callback?.showProgress(false)

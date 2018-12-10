@@ -1,6 +1,7 @@
 package id.ilhamsuaib.footballclub.ui.home
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
@@ -39,18 +40,16 @@ class HomeActivityTest {
          * 12. Swipe ke tab last
          * 13. Swipe ke tab next
          * 14. Pastikan recycler view ready
-         * 15. Scroll ke item 10
-         * 16. Scroll ke item 1
-         * 17. Click item ke 1
+         * 15. Click item ke 1
          * */
-
-        delay(3000)
+        val idlingResource = HomeIdlingResource()
+        //register idling resource
+        IdlingRegistry.getInstance().register(idlingResource)
+        /**wait until load data done then continue to UI test*/
         onView(withId(bottomNav)).check(matches(isDisplayed()))
-        delay()
         onView(withId(menu_teams)).perform(click())
-        delay()
+
         onView(withId(menu_favorite)).perform(click())
-        delay()
         onView(withId(viewPagerFavorites)).check(matches(isDisplayed()))
         delay()
         onView(withId(viewPagerFavorites)).perform(swipeLeft())
@@ -66,19 +65,15 @@ class HomeActivityTest {
         onView(withId(homeViewPager)).perform(swipeLeft())
         delay()
         onView(withId(homeViewPager)).perform(swipeRight())
-        delay()
         onView(withId(rvNextMatch)).check(matches(isDisplayed()))
-        onView(withId(rvNextMatch))
-                .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(12))
-        delay()
-        onView(withId(rvNextMatch))
-                .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(1))
         delay()
         onView(withId(rvNextMatch))
                 .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
+        //unregister idling resource
+        IdlingRegistry.getInstance().unregister(idlingResource)
     }
 
-    private fun delay(time: Long = 500) {
+    private fun delay(time: Long = 200) {
         Thread.sleep(time)
     }
 }
